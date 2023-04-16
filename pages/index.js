@@ -24,11 +24,9 @@ export default function Home({ allPostsData }) {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyle.headingMd}>
-        <p>説明文を書くこと</p>
-      </section>
+      <section className={utilStyle.headingMd}></section>
 
-      <section className={`${utilStyle.headingMd} ${utilStyle.padding1px}`}>
+      <section className={`${utilStyle.headingMd} ${utilStyle.padding50px}`}>
         <div className={styles.grid}>
           {allPostsData.map(({ id, title, date, thumbnail }) => (
             <article key={id}>
