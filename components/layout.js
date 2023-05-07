@@ -24,7 +24,7 @@ const Layout = ({ children, home }) => {
       <main>{children}</main>
       {!home && (
         <div>
-          <Link href="https://neutcode.com/">← ホームへ戻る</Link>
+          <Link href="/">← ホームへ戻る</Link>
         </div>
       )}
     </div>
