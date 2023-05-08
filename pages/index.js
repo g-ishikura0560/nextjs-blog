@@ -40,7 +40,8 @@ export default function Home({ allPostsData }) {
                 <a className={utilStyle.boldText}>{title}</a>
               </Link>
               <br />
-              <small className={utilStyle.lightText}>{date}</small>
+              <div className={utilStyle.lightText}>{date}</div>
+              <div>TODO: mdから取得したtag情報</div>
             </article>
           ))}
         </div>

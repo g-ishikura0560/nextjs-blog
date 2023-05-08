@@ -33,6 +33,7 @@ const Post = ({ postData }) => {
         <article>
           <h1 className={utilStyles.headingX1}>{postData.title}</h1>
           <div className={utilStyles.lightText}>{postData.date}</div>
+          TODO: mdから取得したtag情報
           <div
             dangerouslySetInnerHTML={{ __html: postData.blobContentHTML }}
           ></div>
