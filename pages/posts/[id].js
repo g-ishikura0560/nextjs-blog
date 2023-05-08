@@ -24,16 +24,20 @@ export const getStaticProps = async ({ params }) => {
 const Post = ({ postData }) => {
   return (
     <Layout>
-      <Head>
-        <title>{postData.title}</title>
-      </Head>
-      <article>
-        <h1 className={utilStyles.headingX1}>{postData.title}</h1>
-        <div className={utilStyles.lightText}>{postData.date}</div>
-        <div
-          dangerouslySetInnerHTML={{ __html: postData.blobContentHTML }}
-        ></div>
-      </article>
+      <div
+        className={`${utilStyles.blogArea} ${utilStyles.blogMessageMinHeihgt}`}
+      >
+        <Head>
+          <title>{postData.title}</title>
+        </Head>
+        <article>
+          <h1 className={utilStyles.headingX1}>{postData.title}</h1>
+          <div className={utilStyles.lightText}>{postData.date}</div>
+          <div
+            dangerouslySetInnerHTML={{ __html: postData.blobContentHTML }}
+          ></div>
+        </article>
+      </div>
     </Layout>
   );
 };

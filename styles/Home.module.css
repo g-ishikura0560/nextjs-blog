@@ -13,8 +13,8 @@
 }
 
 .thumbnailImage {
-  width: 950px;
-  height: 400px;
+  width: 500px;
+  height: 300px;
   margin-bottom: 20px;
   box-shadow: 4px 5px 12px black;
   transition: all 0.3s;
@@ -29,7 +29,7 @@
 .grid {
   display: grid;
   flex-wrap: wrap;
-  max-width: 1200px;
+  max-width: 1400px;
   gap: 40px;
   margin: 0 auto;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));

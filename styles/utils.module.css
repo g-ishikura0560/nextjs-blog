@@ -1,3 +1,13 @@
+.blogArea {
+  max-width: 1244px;
+  padding: 0 1rem;
+  margin: 0 auto 0;
+}
+
+.blogMessageMinHeihgt {
+  min-height: 400px;
+}
+
 .heading2Xl {
   font-size: 2.5rem;
   line-height: 1.2;
@@ -23,8 +33,6 @@
 }
 
 .headingMd {
-  font-size: 1.2rem;
-  line-height: 1.5;
   text-align: center;
 }
 
@@ -37,7 +45,7 @@
 }
 
 .padding50px {
-  padding-top: 50px;
+  padding-top: 200px;
 }
 
 .list {

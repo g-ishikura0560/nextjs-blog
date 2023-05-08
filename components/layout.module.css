@@ -1,13 +1,9 @@
-.container {
-  max-width: 1244px;
-  padding: 0 1rem;
-  margin: 3rem auto 6rem;
-}
-
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 6rem;
+  height: 300px;
 }
 
 .headerImage {
@@ -22,4 +18,11 @@
 
 .backToHome {
   margin: 3rem 0 0;
+}
+
+.footer {
+  height: 300px;
+  background-color: #404a60;
+  margin-top: 3rem;
+  bottom: 0;
 }

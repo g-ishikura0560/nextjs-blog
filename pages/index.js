@@ -24,9 +24,12 @@ export default function Home({ allPostsData }) {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyle.headingMd}></section>
 
-      <section className={`${utilStyle.headingMd} ${utilStyle.padding50px}`}>
+      <div className={utilStyle.headingMd}>
+        TODO: ここにタグフィルターを行える機能がほしい
+      </div>
+
+      <div className={`${utilStyle.headingMd} ${utilStyle.padding50px}`}>
         <div className={styles.grid}>
           {allPostsData.map(({ id, title, date, thumbnail }) => (
             <article key={id}>
@@ -41,7 +44,7 @@ export default function Home({ allPostsData }) {
             </article>
           ))}
         </div>
-      </section>
+      </div>
     </Layout>
   );
 }

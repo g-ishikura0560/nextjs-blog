@@ -2465,6 +2465,11 @@
   "resolved" "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz"
   "version" "0.2.0"
 
+"three@^0.135.0":
+  "integrity" "sha512-kuEpuuxRzLv0MDsXai9huCxOSQPZ4vje6y0gn80SRmQvgz6/+rI0NAvCRAw56zYaWKMGMfqKWsxF9Qa2Z9xymQ=="
+  "resolved" "https://registry.npmjs.org/three/-/three-0.135.0.tgz"
+  "version" "0.135.0"
+
 "tiny-glob@^0.2.9":
   "integrity" "sha512-g/55ssRPUjShh+xkfx9UPDXqhckHEsHr4Vd9zX55oSdGZc/MD0m3sferOkwWtp98bv+kcVfEHtRJgBVJzelrzg=="
   "resolved" "https://registry.npmjs.org/tiny-glob/-/tiny-glob-0.2.9.tgz"
@@ -2635,6 +2640,11 @@
     "diff" "^5.0.0"
     "kleur" "^4.0.3"
     "sade" "^1.7.3"
+
+"vanta@^0.5.24":
+  "integrity" "sha512-fvieEbHy1ZS23zrcX+topzqAgA4Uct1enngOEWLFBgs9TtOf6RDFOYatH7KSVdrABzQDMCQ5myQy+nTSZZwLzg=="
+  "resolved" "https://registry.npmjs.org/vanta/-/vanta-0.5.24.tgz"
+  "version" "0.5.24"
 
 "vfile-location@^4.0.0":
   "integrity" "sha512-YF23YMyASIIJXpktBa4vIGLJ5Gs88UB/XePgqPmTa7cDA+JeO3yclbpheQYCHjVHBn/yePzrXuygIL+xbvRYHw=="
