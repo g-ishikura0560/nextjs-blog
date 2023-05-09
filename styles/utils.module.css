@@ -1,3 +1,8 @@
+.center {
+  display: flex;
+  justify-content: center;
+}
+
 .blogArea {
   max-width: 1200px;
   padding: 0 1rem;
@@ -10,13 +15,16 @@
 }
 
 .tagsButton {
+  height: 24px;
   margin-right: 5px;
   cursor: pointer;
   border-radius: 4px;
+  color: white;
+  background-color: black;
 }
 
 .tagsButton:hover {
-  background-color: white;
+  background-color: darkgray;
 }
 
 .heading2Xl {
@@ -55,8 +63,12 @@
   color: inherit;
 }
 
-.padding50px {
-  padding-top: 200px;
+.marginTop50px {
+  margin-top: 50px;
+}
+
+.paddingTop50px {
+  padding-top: 50px;
 }
 
 .list {

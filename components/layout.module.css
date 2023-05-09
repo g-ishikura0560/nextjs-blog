@@ -6,6 +6,10 @@
   height: 300px;
 }
 
+.name {
+  cursor: pointer;
+}
+
 .headerImage {
   width: 6rem;
   height: 6rem;

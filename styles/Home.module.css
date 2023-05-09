@@ -12,6 +12,19 @@
   align-items: center;
 }
 
+.searchInput {
+  padding-top: 30px;
+}
+
+.searchButton {
+  cursor: pointer;
+}
+
+.resetButton {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
 .thumbnailImage {
   width: 440px;
   height: 220px;
@@ -28,6 +41,7 @@
 
 .grid {
   display: grid;
+  justify-content: center;
   flex-wrap: wrap;
   max-width: 1400px;
   gap: 40px;
