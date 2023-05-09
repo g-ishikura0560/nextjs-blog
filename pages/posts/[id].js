@@ -1,5 +1,9 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useSetRecoilState } from "recoil";
+
 import Layout from "../../components/layout";
+import { selectedTagState } from "../../grobalStates/selectedTagAtom";
 import { getAllPostsIds, getPostData } from "../../lib/post";
 import utilStyles from "../../styles/utils.module.css";
 
@@ -22,6 +26,12 @@ export const getStaticProps = async ({ params }) => {
 };
 
 const Post = ({ postData }) => {
+  const router = useRouter();
+  const setText = useSetRecoilState(selectedTagState);
+  const onClickTag = (t) => {
+    setText(t);
+    router.push("/");
+  };
   return (
     <Layout>
       <div
@@ -33,7 +43,15 @@ const Post = ({ postData }) => {
         <article>
           <h1 className={utilStyles.headingX1}>{postData.title}</h1>
           <div className={utilStyles.lightText}>{postData.date}</div>
-          TODO: mdから取得したtag情報
+          {postData.tags.map((t) => (
+            <button
+              key={t}
+              className={utilStyles.tagsButton}
+              onClick={() => onClickTag(t)}
+            >
+              {t}
+            </button>
+          ))}
           <div
             dangerouslySetInnerHTML={{ __html: postData.blobContentHTML }}
           ></div>
