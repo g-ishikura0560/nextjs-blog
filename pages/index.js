@@ -7,6 +7,7 @@ import { useRecoilState } from "recoil";
 
 import Layout, { siteTitle } from "../components/layout";
 import { selectedTagState } from "../grobalStates/selectedTagAtom";
+import { selectedPageState } from "../grobalStates/selectedPageAtom";
 import { getPostsData } from "../lib/post";
 import { PAGE_PER_POST } from "../lib/const";
 
@@ -32,10 +33,10 @@ export async function getStaticProps() {
 }
 
 export default function Home({ allPostsData, allTags }) {
-  const [page, setPage] = useState(0);
   const [searchKeyWork, setSearchKeyWord] = useState("");
   const [displayPostsData, setDisplayPostsData] = useState(allPostsData);
   const [selectedTag, setSelectedTag] = useRecoilState(selectedTagState);
+  const [selectedPage, setSelectedPage] = useRecoilState(selectedPageState);
   const onClickSearch = () => {
     const filterData = allPostsData.filter(
       (d) =>
@@ -50,7 +51,7 @@ export default function Home({ allPostsData, allTags }) {
   };
   const handlePageChange = (data) => {
     const pageNumber = data["selected"];
-    setPage(pageNumber);
+    setSelectedPage(pageNumber);
   };
 
   // 記事ページからタグを選択された時に対応するためuseEffectで監視する
@@ -62,13 +63,13 @@ export default function Home({ allPostsData, allTags }) {
   }, [selectedTag]);
   // 表示データが存在しないページ数が選択されている時に最初のページを強制移動する
   useEffect(() => {
-    if (displayPostsData.length / PAGE_PER_POST < page) {
-      setPage(0);
+    if (displayPostsData.length / PAGE_PER_POST < selectedPage) {
+      setSelectedPage(0);
     }
-  }, [page, displayPostsData]);
+  }, [selectedPage, displayPostsData]);
 
   return (
-    <Layout home>
+    <Layout>
       <Head>
         <title>{siteTitle}</title>
       </Head>
@@ -80,7 +81,10 @@ export default function Home({ allPostsData, allTags }) {
           <>
             <div className={styles.grid}>
               {displayPostsData
-                .slice(page * PAGE_PER_POST, (page + 1) * PAGE_PER_POST)
+                .slice(
+                  selectedPage * PAGE_PER_POST,
+                  (selectedPage + 1) * PAGE_PER_POST
+                )
                 .map(({ id, title, date, thumbnail, tags }) => (
                   <article key={id}>
                     <Link href={`/posts/${id}`}>
@@ -107,7 +111,7 @@ export default function Home({ allPostsData, allTags }) {
               className={`${utilStyles.center} ${utilStyles.paddingTop50px}`}
             >
               <ReactPaginate
-                forcePage={page}
+                forcePage={selectedPage}
                 pageCount={Math.ceil(displayPostsData.length / PAGE_PER_POST)}
                 onPageChange={handlePageChange}
                 containerClassName={styles.pagination}

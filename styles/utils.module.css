@@ -3,12 +3,22 @@
   justify-content: center;
 }
 
+.spaceBetween {
+  display: flex;
+  justify-content: space-between;
+}
+
 .blogArea {
-  max-width: 1000px;
+  max-width: 1300px;
+  padding-top: 3rem;
+  margin: auto;
+}
+
+.contentArea {
+  width: calc(100% - 330px);
   padding: 0 1rem;
   border-radius: 12px;
   box-shadow: 0 2px 4px;
-  margin: auto;
 }
 
 .blogMessageMinHeihgt {
@@ -95,7 +105,7 @@
 }
 
 .headlineArea {
-  width: 200px;
+  width: 300px;
   height: 300px;
   border-radius: 12px;
   background-color: gray;

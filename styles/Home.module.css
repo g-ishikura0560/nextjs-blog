@@ -55,12 +55,22 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  gap: 10px;
+  border-radius: 10px;
+  gap: 5px;
   list-style-type: none;
   padding-left: 0;
 }
 
+.pagination > li {
+  border-radius: 100px;
+  width: 30px;
+  background-color: gray;
+}
+
+.pagination > li > a {
+  color: black;
+}
+
 .active > a {
-  color: darkblue;
-  font-weight: bold;
+  color: white !important;
 }

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { useSetRecoilState } from "recoil";
 import { selectedTagState } from "../grobalStates/selectedTagAtom";
+import { selectedPageState } from "../grobalStates/selectedPageAtom";
 import FOG from "vanta/dist/vanta.fog.min";
 import * as THREE from "three";
 
@@ -14,14 +15,16 @@ import utilStyles from "../styles/utils.module.css";
 const name = "Neut Code Engineer Blog";
 export const siteTitle = "Neut Blog";
 
-const Layout = ({ children, home }) => {
+const Layout = ({ children }) => {
   const [vantaEffect, setVantaEffect] = useState(0);
   const vantaRef = useRef(null);
-  const setText = useSetRecoilState(selectedTagState);
+  const setSelectedTag = useSetRecoilState(selectedTagState);
+  const setSelectedPage = useSetRecoilState(selectedPageState);
   const router = useRouter();
 
   const goHome = () => {
-    setText("");
+    setSelectedTag("");
+    setSelectedPage(0);
     router.push("/");
   };
 
