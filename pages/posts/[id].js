@@ -27,9 +27,9 @@ export const getStaticProps = async ({ params }) => {
 
 const Post = ({ postData }) => {
   const router = useRouter();
-  const setText = useSetRecoilState(selectedTagState);
+  const setTag = useSetRecoilState(selectedTagState);
   const onClickTag = (t) => {
-    setText(t);
+    setTag(t);
     router.push("/");
   };
   return (
@@ -41,21 +41,28 @@ const Post = ({ postData }) => {
           <title>{postData.title}</title>
         </Head>
         <article>
-          <h1 className={utilStyles.headingX1}>{postData.title}</h1>
+          <h1 className={utilStyles.headingXl}>{postData.title}</h1>
           <div className={utilStyles.lightText}>{postData.date}</div>
-          {postData.tags.map((t) => (
-            <button
-              key={t}
-              className={utilStyles.tagsButton}
-              onClick={() => onClickTag(t)}
-            >
-              {t}
-            </button>
-          ))}
+          <div>
+            {postData.tags.map((t) => (
+              <button
+                key={t}
+                className={utilStyles.tagsButton}
+                onClick={() => onClickTag(t)}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+
           <div
             dangerouslySetInnerHTML={{ __html: postData.blobContentHTML }}
           ></div>
         </article>
+      </div>
+      <div className={utilStyles.headlineArea}>
+        <div>TODO: 目次</div>
+        <div>TODO: スクロール追従</div>
       </div>
     </Layout>
   );

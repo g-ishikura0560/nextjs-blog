@@ -29,6 +29,7 @@
   width: 440px;
   height: 220px;
   margin-bottom: 20px;
+  border-radius: 12px;
   box-shadow: 4px 5px 12px black;
   transition: all 0.3s;
   cursor: pointer;
@@ -47,4 +48,19 @@
   gap: 40px;
   margin: 0 auto;
   grid-template-columns: repeat(auto-fit, 440px);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  gap: 10px;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.active > a {
+  color: darkblue;
+  font-weight: bold;
 }

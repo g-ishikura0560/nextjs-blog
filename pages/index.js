@@ -1,12 +1,14 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { useRecoilState } from "recoil";
 
 import Layout, { siteTitle } from "../components/layout";
 import { selectedTagState } from "../grobalStates/selectedTagAtom";
 import { getPostsData } from "../lib/post";
+import { PAGE_PER_POST } from "../lib/const";
 
 import styles from "../styles/Home.module.css";
 import utilStyles from "../styles/utils.module.css";
@@ -30,6 +32,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ allPostsData, allTags }) {
+  const [page, setPage] = useState(0);
   const [searchKeyWork, setSearchKeyWord] = useState("");
   const [displayPostsData, setDisplayPostsData] = useState(allPostsData);
   const [selectedTag, setSelectedTag] = useRecoilState(selectedTagState);
@@ -45,10 +48,25 @@ export default function Home({ allPostsData, allTags }) {
     setDisplayPostsData(allPostsData);
     setSelectedTag("");
   };
-  const onClickTag = (tag) => {
-    setDisplayPostsData(allPostsData);
-    setSelectedTag(tag);
+  const handlePageChange = (data) => {
+    const pageNumber = data["selected"];
+    setPage(pageNumber);
   };
+
+  // 記事ページからタグを選択された時に対応するためuseEffectで監視する
+  useEffect(() => {
+    const filterData = allPostsData.filter((d) =>
+      String(d.tags).match(selectedTag)
+    );
+    setDisplayPostsData(filterData);
+  }, [selectedTag]);
+  // 表示データが存在しないページ数が選択されている時に最初のページを強制移動する
+  useEffect(() => {
+    if (displayPostsData.length / PAGE_PER_POST < page) {
+      setPage(0);
+    }
+  }, [page, displayPostsData]);
+
   return (
     <Layout home>
       <Head>
@@ -59,10 +77,11 @@ export default function Home({ allPostsData, allTags }) {
         {displayPostsData.length === 0 ? (
           <div className={styles.notFound}>記事が見つかりません</div>
         ) : (
-          <div className={styles.grid}>
-            {displayPostsData.map(
-              ({ id, title, date, thumbnail, tags }) =>
-                (selectedTag === "" || tags.find((t) => t === selectedTag)) && (
+          <>
+            <div className={styles.grid}>
+              {displayPostsData
+                .slice(page * PAGE_PER_POST, (page + 1) * PAGE_PER_POST)
+                .map(({ id, title, date, thumbnail, tags }) => (
                   <article key={id}>
                     <Link href={`/posts/${id}`}>
                       <img src={thumbnail} className={styles.thumbnailImage} />
@@ -76,24 +95,38 @@ export default function Home({ allPostsData, allTags }) {
                       <button
                         key={t}
                         className={utilStyles.tagsButton}
-                        onClick={() => onClickTag(t)}
+                        onClick={() => setSelectedTag(t)}
                       >
                         {t}
                       </button>
                     ))}
                   </article>
-                )
-            )}
-          </div>
+                ))}
+            </div>
+            <div
+              className={`${utilStyles.center} ${utilStyles.paddingTop50px}`}
+            >
+              <ReactPaginate
+                forcePage={page}
+                pageCount={Math.ceil(displayPostsData.length / PAGE_PER_POST)}
+                onPageChange={handlePageChange}
+                containerClassName={styles.pagination}
+                activeClassName={styles.active}
+                previousLabel={"<"}
+                nextLabel={">"}
+                breakLabel={"..."}
+              />
+            </div>
+          </>
         )}
         <hr className={utilStyles.marginTop50px} />
         <h2>Category</h2>
-        <div className={`${utilStyles.center}`}>
+        <div className={utilStyles.center}>
           {allTags.map((t) => (
             <button
               key={t}
               className={utilStyles.tagsButton}
-              onClick={() => onClickTag(t)}
+              onClick={() => setSelectedTag(t)}
             >
               {t}
             </button>
@@ -112,7 +145,9 @@ export default function Home({ allPostsData, allTags }) {
             リセット
           </button>
         </div>
-        {/* TODO: アーカイブ */}
+        <hr className={utilStyles.marginTop50px} />
+        <h2>Archive</h2>
+        TODO: ここに月ごとのアーカイブを作成したい
       </div>
     </Layout>
   );

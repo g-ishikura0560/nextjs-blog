@@ -54,11 +54,6 @@ const Layout = ({ children, home }) => {
         </div>
       </header>
       <main>{children}</main>
-      {!home && (
-        <div className={utilStyles.blogArea}>
-          <Link href="/">← ホームへ戻る</Link>
-        </div>
-      )}
       <Footer />
     </>
   );
