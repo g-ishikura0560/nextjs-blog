@@ -69,6 +69,7 @@
 
 .pagination > li > a {
   color: black;
+  display: block;
 }
 
 .active > a {

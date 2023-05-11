@@ -77,8 +77,16 @@
   color: inherit;
 }
 
+.marginTop20px {
+  margin-top: 20px;
+}
+
 .marginTop50px {
   margin-top: 50px;
+}
+
+.marginLeft50px {
+  margin-left: 50px;
 }
 
 .paddingTop50px {

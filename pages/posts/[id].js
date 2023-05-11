@@ -4,6 +4,7 @@ import { useSetRecoilState } from "recoil";
 
 import Layout from "../../components/layout";
 import { selectedTagState } from "../../grobalStates/selectedTagAtom";
+import { selectedPageState } from "../../grobalStates/selectedPageAtom";
 import { getAllPostsIds, getPostData } from "../../lib/post";
 import utilStyles from "../../styles/utils.module.css";
 
@@ -27,9 +28,11 @@ export const getStaticProps = async ({ params }) => {
 
 const Post = ({ postData }) => {
   const router = useRouter();
-  const setTag = useSetRecoilState(selectedTagState);
+  const setSelectedTag = useSetRecoilState(selectedTagState);
+  const setSelectedPage = useSetRecoilState(selectedPageState);
   const onClickTag = (t) => {
-    setTag(t);
+    setSelectedTag(t);
+    setSelectedPage(0);
     router.push("/");
   };
   return (

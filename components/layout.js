@@ -12,7 +12,7 @@ import Footer from "./footer";
 import styles from "./layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 
-const name = "Neut Code Engineer Blog";
+const name = "Neut Code Tech Blog";
 export const siteTitle = "Neut Blog";
 
 const Layout = ({ children }) => {

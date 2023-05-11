@@ -1,6 +1,6 @@
 ---
 title: "test01について"
-date: "2023-04-28"
+date: "2023-03-28"
 thumbnail: "/images/react.jpg"
 tags: ["React", "hooks", "useEffect", "Next"]
 ---

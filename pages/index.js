@@ -37,6 +37,11 @@ export default function Home({ allPostsData, allTags }) {
   const [displayPostsData, setDisplayPostsData] = useState(allPostsData);
   const [selectedTag, setSelectedTag] = useRecoilState(selectedTagState);
   const [selectedPage, setSelectedPage] = useRecoilState(selectedPageState);
+
+  const onClickTag = (tag) => {
+    setSelectedTag(tag);
+    setSelectedPage(0);
+  };
   const onClickSearch = () => {
     const filterData = allPostsData.filter(
       (d) =>
@@ -44,10 +49,13 @@ export default function Home({ allPostsData, allTags }) {
     );
     setDisplayPostsData(filterData);
     setSelectedTag("");
+    setSelectedPage(0);
   };
+
   const onClickReset = () => {
     setDisplayPostsData(allPostsData);
     setSelectedTag("");
+    setSelectedPage(0);
   };
   const handlePageChange = (data) => {
     const pageNumber = data["selected"];
@@ -99,7 +107,7 @@ export default function Home({ allPostsData, allTags }) {
                       <button
                         key={t}
                         className={utilStyles.tagsButton}
-                        onClick={() => setSelectedTag(t)}
+                        onClick={() => onClickTag(t)}
                       >
                         {t}
                       </button>
@@ -116,6 +124,8 @@ export default function Home({ allPostsData, allTags }) {
                 onPageChange={handlePageChange}
                 containerClassName={styles.pagination}
                 activeClassName={styles.active}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={2}
                 previousLabel={"<"}
                 nextLabel={">"}
                 breakLabel={"..."}
