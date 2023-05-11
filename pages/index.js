@@ -6,6 +6,7 @@ import ReactPaginate from "react-paginate";
 import { useRecoilState } from "recoil";
 
 import Layout, { siteTitle } from "../components/layout";
+import { isClickTitleState } from "../grobalStates/isClickTitleStateAtom";
 import { selectedTagState } from "../grobalStates/selectedTagAtom";
 import { selectedPageState } from "../grobalStates/selectedPageAtom";
 import { getPostsData } from "../lib/post";
@@ -20,21 +21,42 @@ export async function getStaticProps() {
   const sortData = allPostsData.sort(
     (x, y) => -(new Date(x.date).getTime() - new Date(y.date).getTime())
   );
+  // for Category
   const tags = allPostsData.map((d) => {
     return d.tags;
   });
   const tagsSet = new Set(tags.reduce((x, y) => [...x, ...y]));
+  // for Archive
+  const dates = sortData.map((d) => {
+    return d.date;
+  });
+  const dateCountMap = new Map();
+  let yearMonth;
+  let dateCount;
+  dates.forEach((d) => {
+    // d.slice(0,7): yyyy-mm
+    if (yearMonth === d.slice(0, 7)) {
+      dateCount = dateCount + 1;
+      dateCountMap.set(yearMonth, dateCount);
+    } else {
+      yearMonth = d.slice(0, 7);
+      dateCount = 1;
+      dateCountMap.set(yearMonth, dateCount);
+    }
+  });
   return {
     props: {
       allPostsData: sortData,
       allTags: [...tagsSet],
+      dateCount: Object.fromEntries(dateCountMap),
     },
   };
 }
 
-export default function Home({ allPostsData, allTags }) {
+export default function Home({ allPostsData, allTags, dateCount }) {
   const [searchKeyWork, setSearchKeyWord] = useState("");
   const [displayPostsData, setDisplayPostsData] = useState(allPostsData);
+  const [isClickTitle, setIsClickTitle] = useRecoilState(isClickTitleState);
   const [selectedTag, setSelectedTag] = useRecoilState(selectedTagState);
   const [selectedPage, setSelectedPage] = useRecoilState(selectedPageState);
 
@@ -61,14 +83,23 @@ export default function Home({ allPostsData, allTags }) {
     const pageNumber = data["selected"];
     setSelectedPage(pageNumber);
   };
+  const onClickArchive = (date) => {
+    const filterData = allPostsData.filter((d) =>
+      d.date.slice(0, 7).match(date)
+    );
+    setDisplayPostsData(filterData);
+    setSelectedTag("");
+    setSelectedPage(0);
+  };
 
   // 記事ページからタグを選択された時に対応するためuseEffectで監視する
   useEffect(() => {
     const filterData = allPostsData.filter((d) =>
       String(d.tags).match(selectedTag)
     );
+    setIsClickTitle(false);
     setDisplayPostsData(filterData);
-  }, [selectedTag]);
+  }, [isClickTitle, selectedTag]);
   // 表示データが存在しないページ数が選択されている時に最初のページを強制移動する
   useEffect(() => {
     if (displayPostsData.length / PAGE_PER_POST < selectedPage) {
@@ -160,8 +191,19 @@ export default function Home({ allPostsData, allTags }) {
           </button>
         </div>
         <hr className={utilStyles.marginTop50px} />
-        <h2>Archive</h2>
-        TODO: ここに月ごとのアーカイブを作成したい
+        <h2>Archive (TODO)</h2>
+        <div className={utilStyles.center}>
+          <div className={styles.archiveArea}>
+            {Object.keys(dateCount).map((date) => (
+              <div
+                className={styles.archive}
+                onClick={() => onClickArchive(date)}
+              >
+                {date} ({dateCount[date]})
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </Layout>
   );

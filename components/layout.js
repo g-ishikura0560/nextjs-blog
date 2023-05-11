@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { useSetRecoilState } from "recoil";
+import { isClickTitleState } from "../grobalStates/isClickTitleStateAtom";
 import { selectedTagState } from "../grobalStates/selectedTagAtom";
 import { selectedPageState } from "../grobalStates/selectedPageAtom";
 import FOG from "vanta/dist/vanta.fog.min";
@@ -18,11 +19,13 @@ export const siteTitle = "Neut Blog";
 const Layout = ({ children }) => {
   const [vantaEffect, setVantaEffect] = useState(0);
   const vantaRef = useRef(null);
+  const setIsClickTitle = useSetRecoilState(isClickTitleState);
   const setSelectedTag = useSetRecoilState(selectedTagState);
   const setSelectedPage = useSetRecoilState(selectedPageState);
   const router = useRouter();
 
   const goHome = () => {
+    setIsClickTitle(true);
     setSelectedTag("");
     setSelectedPage(0);
     router.push("/");

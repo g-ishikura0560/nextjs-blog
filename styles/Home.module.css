@@ -75,3 +75,15 @@
 .active > a {
   color: white !important;
 }
+
+.archiveArea {
+  width: 1000px;
+}
+
+.archive {
+  cursor: pointer;
+}
+
+.archive:hover {
+  text-decoration: underline;
+}
